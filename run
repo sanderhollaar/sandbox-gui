@@ -1,0 +1,2 @@
+#!/bin/sh
+gunicorn server:app --reload $(find templates -type f -name '*.j2' -exec echo --reload-extra-file {} \;)

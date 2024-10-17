@@ -1,0 +1,103 @@
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{url_for('static', filename='qrcode.min.js')}}"></script>
+</head>
+<body>
+
+
+<p>Test</p>
+{{ id }}
+
+<div id=qrcode></div>
+<div id=uri></div>
+<div id=status>...</div>
+<div id=info>...</div>
+
+<script type="text/javascript">
+function api(url) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false);
+    xmlHttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    xmlHttp.send(null);
+    if (xmlHttp.status === 200) {
+        var result = JSON.parse(xmlHttp.responseText);
+    } else {
+        var result = "ERROR";
+    }
+    return result;
+}
+
+function getTest(id) {
+    return api("/api/get/" + id);
+}
+
+function getPAC(id) {
+    return api("/api/pre_authorized_code/" + id);
+}
+
+function getVerifier(id) {
+    return api("/api/verifier/" + id);
+}
+
+function checkPACStatus() {
+    var status = api("/api/pac_status/" + pac.pac);
+    //console.log(status)
+    status_element.innerHTML = status
+    if (status === "OFFER_URI_RETRIEVED" && pac.pin && ! alert_shown) {
+        alert(pac.pin);
+        alert_shown = true;
+    } else if (status === "CREDENTIAL_ISSUED") {
+        qr_element.innerHTML = "";
+        return;
+    }
+    setTimeout(checkPACStatus, 1000);
+}
+
+function checkVerifierStatus() {
+    var result = api("/api/verifier_status/" + verifier.code);
+    var status = result.status
+    //console.log(status)
+    status_element.innerHTML = status
+    if (status === "RESPONSE_RECEIVED" ) {
+        qr_element.innerHTML = "<pre>" + JSON.stringify(result.result, null, 4) + "</pre>";
+        return;
+    }
+    setTimeout(checkVerifierStatus, 1000);
+}
+
+var qr_element = document.getElementById("qrcode");
+var uri_element = document.getElementById("uri");
+var status_element = document.getElementById("status");
+var info_element = document.getElementById("info");
+var alert_shown = false;
+
+var qrcode = new QRCode(qr_element, {
+    width : 256,
+    height : 256
+});
+
+var result = getTest("{{ id }}");
+console.log(result);
+
+if (result.test.type === "issuance") {
+    pac = getPAC(result.id);
+    qrcode.makeCode(pac.qr_uri);
+    uri_element.innerHTML = pac.qr_uri;
+    info_element.innerHTML = "<pre>" + JSON.stringify(pac.data, null, 4) + "</pre>";
+    checkPACStatus();
+}
+
+if (result.test.type === "verification") {
+    verifier = getVerifier(result.id);
+    qrcode.makeCode(verifier.qr_uri);
+    uri_element.innerHTML = verifier.qr_uri;
+    info_element.innerHTML = "<pre>" + JSON.stringify(verifier.code, null, 4) + "</pre>";
+    checkVerifierStatus();
+
+}
+
+</script>
+
+</body>
+</html>
