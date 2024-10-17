@@ -147,7 +147,7 @@ def verifier(id):
     with request.urlopen(req) as f:
         res = json.loads(f.read().decode())
 
-    print(res)
+    # print(res)
 
     qr_uri = res['requestUri']
     check_uri = res['checkUri']

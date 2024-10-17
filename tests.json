@@ -43,9 +43,6 @@
         "spec_version": "Draft 13",
         "credential": {
             "name": "PID"
-        },
-        "options": {
-            "tx_code": true
         }
     }
 }
