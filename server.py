@@ -16,7 +16,7 @@ def parse_tests(tests):
     for id, test in tests.items():
         # body += json.dumps(test, indent=4)
         # body += f"{id}\n"
-        body += f"<a href='/test/{id}'>{test['name']}</a>\n"
+        body += f"<a href='/{id}'>{test['name']}</a>\n"
         body += f"{test['description']}\n"
         body += f"{test['type']}\n"
         body += f"{test['spec_version']}\n\n"
@@ -33,7 +33,7 @@ def server():
     return render_template("server.j2", body=body)
 
 
-@app.route("/test/<id>")
+@app.route("/<id>")
 def test(id):
     return render_template("test.j2", id=id)
 
