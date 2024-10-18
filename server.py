@@ -176,11 +176,11 @@ def verifier(id):
 def verifier_status(code):
     # check_url = f'https://verifier.dev.eduwallet.nl/proxy/api/check-offer/{code}'
     check_url = VERIFIER + f'/check-offer/{code}'
-    verifier_token = 'PElLibogkyc3cBUBvYRSMK7q4yThXYwM'
+    # verifier_token = 'PElLibogkyc3cBUBvYRSMK7q4yThXYwM'
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {verifier_token}"
+        "Authorization": f"Bearer {VERIFIER_TOKEN}"
     }
 
     req = request.Request(check_url, None, headers)
