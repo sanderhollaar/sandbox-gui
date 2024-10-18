@@ -5,6 +5,12 @@ import urllib.request as request
 from flask import Flask, render_template
 
 
+ISSUER = 'https://agent.dev.eduwallet.nl/dashboard/api'
+ISSUER_TOKEN = 'bfOPbpdLHKLpY7GImgvnqp5mcV2jQrpF'
+VERIFIER = 'https://verifier.dev.eduwallet.nl/dashboard/api'
+VERIFIER_TOKEN = 'SE59wNFgsie3SiQ0DaGVp9JNI6Tp8SHL'
+
+
 def randid():
     allowed_chars = 'abcdefghijklmnoprstuvwxyz1234567890'
     length = 16
@@ -12,15 +18,16 @@ def randid():
 
 
 def parse_tests(tests):
-    body = "<pre>\n"
+    # body = "<pre>\n"
+    body = ""
     for id, test in tests.items():
         # body += json.dumps(test, indent=4)
         # body += f"{id}\n"
-        body += f"<a href='/{id}'>{test['name']}</a>\n"
-        body += f"{test['description']}\n"
-        body += f"{test['type']}\n"
-        body += f"{test['spec_version']}\n\n"
-    body += "</pre>\n"
+        body += f"<h3><a href='/{id}'>{test['name']}</a></h3>\n"
+        body += f"<p>{test['description']}</p>\n"
+        body += f"<p>{test['type']}</p>\n"
+        body += f"<p>{test['spec_version']}</p>\n"
+    body += "<br>\n"
 
     return body
 
@@ -71,13 +78,13 @@ def api_pre_authorized_code(id):
 
     json_data = json.dumps(data).encode("utf-8")
 
-    issuer_url = 'https://agent.dev.eduwallet.nl/uvh/api'
-    create_url = issuer_url + "/create-offer"
-    issuer_token = 'KZrytiX6RXDaXIUnstjCKyr1SRIblhWi'
+    # issuer_url = 'https://agent.dev.eduwallet.nl/uvh/api'
+    create_url = ISSUER + "/create-offer"
+    # issuer_token = 'KZrytiX6RXDaXIUnstjCKyr1SRIblhWi'
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {issuer_token}"
+        "Authorization": f"Bearer {ISSUER_TOKEN}"
     }
 
     req = request.Request(create_url, json_data, headers)
@@ -110,8 +117,8 @@ def pac_status(pac):
 
     json_data = json.dumps(data).encode("utf-8")
 
-    issuer_url = 'https://agent.dev.eduwallet.nl/uvh/api'
-    check_url = issuer_url + "/check-offer"
+    # issuer_url = 'https://agent.dev.eduwallet.nl/uvh/api'
+    check_url = ISSUER + "/check-offer"
 
     headers = {
         "Content-Type": "application/json",
@@ -130,17 +137,18 @@ def pac_status(pac):
 @app.route("/api/verifier/<id>")
 def verifier(id):
     test = tests[id]
+    name = test['credential']['name']
 
     data = {}
     json_data = json.dumps(data).encode("utf-8")
 
-    verifier_url = 'https://verifier.dev.eduwallet.nl/proxy/api'
-    create_url = verifier_url + "/create-offer/" + test['credential']['name']
-    verifier_token = 'PElLibogkyc3cBUBvYRSMK7q4yThXYwM'
+    # verifier_url = 'https://verifier.dev.eduwallet.nl/proxy/api'
+    create_url = VERIFIER + "/create-offer/" + name
+    # verifier_token = 'PElLibogkyc3cBUBvYRSMK7q4yThXYwM'
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {verifier_token}"
+        "Authorization": f"Bearer {VERIFIER_TOKEN}"
     }
 
     req = request.Request(create_url, json_data, headers)
@@ -166,7 +174,8 @@ def verifier(id):
 
 @app.route("/api/verifier_status/<code>")
 def verifier_status(code):
-    check_url = f'https://verifier.dev.eduwallet.nl/proxy/api/check-offer/{code}'
+    # check_url = f'https://verifier.dev.eduwallet.nl/proxy/api/check-offer/{code}'
+    check_url = VERIFIER + f'/check-offer/{code}'
     verifier_token = 'PElLibogkyc3cBUBvYRSMK7q4yThXYwM'
 
     headers = {
