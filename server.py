@@ -5,9 +5,9 @@ import urllib.request as request
 from flask import Flask, render_template
 
 
-ISSUER = 'https://agent.dev.eduwallet.nl/dashboard/api'
+ISSUER = 'https://agent.dev.eduwallet.nl/sandbox/api'
 ISSUER_TOKEN = 'bfOPbpdLHKLpY7GImgvnqp5mcV2jQrpF'
-VERIFIER = 'https://verifier.dev.eduwallet.nl/dashboard/api'
+VERIFIER = 'https://verifier.dev.eduwallet.nl/sandbox/api'
 VERIFIER_TOKEN = 'SE59wNFgsie3SiQ0DaGVp9JNI6Tp8SHL'
 
 
@@ -37,7 +37,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def server():
-    return render_template("server.j2", body=body)
+    # return render_template("server.j2", body=body)
+    return render_template("server.j2", tests=tests)
 
 
 @app.route("/<id>")
@@ -202,7 +203,7 @@ def verifier_status(code):
 
 with open('tests.json') as data:
     tests = json.load(data)
-    body = parse_tests(tests)
+    # body = parse_tests(tests)
 
 
 if __name__ == "__main__":

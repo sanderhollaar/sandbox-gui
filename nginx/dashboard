@@ -1,13 +1,13 @@
 server {
   listen 80;
-  #server_name test-dashboard.pt-76.utr.surfcloud.nl;
+  server_name  sandbox.dev.eduwalet.nl;
 
   location / {
     proxy_pass http://localhost:8000;
   }
 
   location /.well-known/did.json {
-    proxy_pass https://agent.dev.eduwallet.nl/dashboard/.well-known/did.json;
+    proxy_pass https://agent.dev.eduwallet.nl/sandbox/.well-known/did.json;
   }
 
   location /images/ {

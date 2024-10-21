@@ -1,12 +1,12 @@
 {
     "test_01": {
         "name": "Name of the test 1",
-        "description": "A more detailed descriptopn of the test 1",
+        "description": "A detailed description of the test 1",
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
         "credential": {
-            "name": "AcademicBaseCredential",
+            "type": "AcademicBaseCredential",
             "claims": {
                 "_ttl": ["31104000"],
                 "sub": ["43e27e05-a688-41df-ab1e-b74271fe02c6"],
@@ -38,11 +38,11 @@
     },
     "test_02": {
         "name": "Name of the test 2",
-        "description": "A more detailed descriptopn of ths test 2",
+        "description": "A more detailed description of the test 2",
         "type": "verification",
         "spec_version": "Draft 13",
         "credential": {
-            "name": "PID"
+            "type": "PID"
         }
     }
 }
