@@ -6,13 +6,13 @@
 <body>
 <h2>eduWallet Test Dashboard</h2>
 {% for id, test in tests.items() %}
-<div class=test>
-<h3><a href="/{{ id }}">{{ test.name }}</a></h3>
-<p>{{ test.description }}</p>
-<p>credential type: {{ test.credential.type }}</p>
-<p>type: {{ test.type }}</p>
-<p>spec: {{ test.spec_version }}</p>
-</div>
+    <div class=test>
+        <h3><a href="/{{ id }}">{{ test.name }}</a></h3>
+        <p>{{ test.description }}</p>
+        <p>credential type: {{ test.credential.type }}</p>
+        <p>type: {{ test.type }}</p>
+        <p>spec: {{ test.spec_version }}</p>
+    </div>
 {% endfor %}
 
 </body>

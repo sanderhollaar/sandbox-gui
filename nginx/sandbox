@@ -1,6 +1,6 @@
 server {
   listen 80;
-  server_name  sandbox.dev.eduwalet.nl;
+  server_name sandbox.dev.eduwallet.nl;
 
   location / {
     proxy_pass http://localhost:8000;
