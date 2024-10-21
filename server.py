@@ -17,27 +17,11 @@ def randid():
     return ''.join([random.choice(allowed_chars) for n in range(length)])
 
 
-def parse_tests(tests):
-    # body = "<pre>\n"
-    body = ""
-    for id, test in tests.items():
-        # body += json.dumps(test, indent=4)
-        # body += f"{id}\n"
-        body += f"<h3><a href='/{id}'>{test['name']}</a></h3>\n"
-        body += f"<p>{test['description']}</p>\n"
-        body += f"<p>{test['type']}</p>\n"
-        body += f"<p>{test['spec_version']}</p>\n"
-    body += "<br>\n"
-
-    return body
-
-
 app = Flask(__name__)
 
 
 @app.route("/")
 def server():
-    # return render_template("server.j2", body=body)
     return render_template("server.j2", tests=tests)
 
 
@@ -65,7 +49,7 @@ def api_pre_authorized_code(id):
 
     pre_authorized_code = randid()
     data = {
-        'credentials': [test['credential']['name']],
+        'credentials': [test['credential']['type']],
         'grants': {
             'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
                 'pre-authorized_code': pre_authorized_code,
@@ -79,9 +63,7 @@ def api_pre_authorized_code(id):
 
     json_data = json.dumps(data).encode("utf-8")
 
-    # issuer_url = 'https://agent.dev.eduwallet.nl/uvh/api'
     create_url = ISSUER + "/create-offer"
-    # issuer_token = 'KZrytiX6RXDaXIUnstjCKyr1SRIblhWi'
 
     headers = {
         "Content-Type": "application/json",
@@ -118,7 +100,6 @@ def pac_status(pac):
 
     json_data = json.dumps(data).encode("utf-8")
 
-    # issuer_url = 'https://agent.dev.eduwallet.nl/uvh/api'
     check_url = ISSUER + "/check-offer"
 
     headers = {
@@ -138,14 +119,12 @@ def pac_status(pac):
 @app.route("/api/verifier/<id>")
 def verifier(id):
     test = tests[id]
-    name = test['credential']['name']
+    name = test['credential']['type']
 
     data = {}
     json_data = json.dumps(data).encode("utf-8")
 
-    # verifier_url = 'https://verifier.dev.eduwallet.nl/proxy/api'
     create_url = VERIFIER + "/create-offer/" + name
-    # verifier_token = 'PElLibogkyc3cBUBvYRSMK7q4yThXYwM'
 
     headers = {
         "Content-Type": "application/json",
@@ -203,7 +182,6 @@ def verifier_status(code):
 
 with open('tests.json') as data:
     tests = json.load(data)
-    # body = parse_tests(tests)
 
 
 if __name__ == "__main__":
