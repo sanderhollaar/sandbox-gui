@@ -1,7 +1,7 @@
 {
     "test_01": {
         "name": "Name of the test 1",
-        "description": "A detailed description of the test 1",
+        "description": "A detailed description of the test 1 foobar foobar foobar ",
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",

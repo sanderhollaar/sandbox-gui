@@ -26,8 +26,10 @@ a {
 div.test {
     margin: 4px;
     padding: 8px;
+    width: 300px;
+    vertical-align: top;
     display: inline-block;
-    border: 3px solid black;
+    border: 3px solid darkblue;
     border-radius: 10px;
     background-color: azure;
 }
