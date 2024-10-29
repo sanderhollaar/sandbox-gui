@@ -4,15 +4,15 @@
 </head>
 
 <body>
-<h2>eduWallet Test Dashboard</h2>
+<h2>eduWallet Sandbox</h2>
 {% for id, test in tests.items() %}
-    <div class=test>
-        <h3><a href="/{{ id }}">{{ test.name }}</a></h3>
+    <a href="/{{ id }}"><div class=test>
+        <h3>{{ test.name }}</h3>
         <p>{{ test.description }}</p>
         <p>credential type: {{ test.credential.type }}</p>
         <p>type: {{ test.type }}</p>
         <p>spec: {{ test.spec_version }}</p>
-    </div>
+    </div></a>
 {% endfor %}
 
 </body>

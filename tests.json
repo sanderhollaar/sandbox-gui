@@ -1,7 +1,7 @@
 {
     "test_01": {
-        "name": "Name of the test 1",
-        "description": "A detailed description of the test 1 foobar foobar foobar ",
+        "name": "Issue VC",
+        "description": "Issue VC",
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
@@ -37,6 +37,44 @@
         }
     },
     "test_02": {
+        "name": "Issue VC & Revoke",
+        "description": "Issue VC and immediately revoke",
+        "type": "issuance",
+        "flow": "pre_authorized_code",
+        "spec_version": "Draft 13",
+        "credential": {
+            "type": "AcademicBaseCredential",
+            "claims": {
+                "_ttl": ["31104000"],
+                "sub": ["43e27e05-a688-41df-ab1e-b74271fe02c6"],
+                "eduperson_unique_id": ["43e27e05-a688-41df-ab1e-b74271fe02c6"],
+                "given_name": ["Sharon"],
+                "family_name": ["Hankins"],
+                "name": ["Sharon Hankins"],
+                "schac_home_organisation": ["UvH.nl"],
+                "email": ["eduwallet.test+shankins.uvh@gmail.com"],
+                "eduperson_affiliation": [
+                    "student",
+                    "member"
+                ],
+                "eduperson_scoped_affiliation": [
+                    "student@uvh.nl",
+                    "member@uvh.nl"
+                ],
+                "eduperson_entitlement": [
+                    "urn:mace:dir:entitlement:common-lib-terms-example"
+                ],
+                "eduperson_assurance": [
+                    "https://refeds.org/assurance"
+                ]
+            }
+        },
+        "options": {
+            "tx_code": true,
+            "revoke": true
+        }
+    },
+    "test_03": {
         "name": "Name of the test 2",
         "description": "A more detailed description of the test 2",
         "type": "verification",

@@ -2,7 +2,7 @@
 import json
 import random
 import urllib.request as request
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 
 
 ISSUER = 'https://agent.dev.eduwallet.nl/sandbox/api'
@@ -18,7 +18,7 @@ def randid():
 
 
 app = Flask(__name__)
-
+app.secret_key = b'secret'
 
 @app.route("/")
 def server():
@@ -61,6 +61,8 @@ def api_pre_authorized_code(id):
     if test['options'].get('tx_code', None):
         data['grants']['urn:ietf:params:oauth:grant-type:pre-authorized_code']['tx_code'] = True
 
+    session['revoke'] = test['options'].get('revoke', False)
+
     json_data = json.dumps(data).encode("utf-8")
 
     create_url = ISSUER + "/create-offer"
@@ -94,6 +96,10 @@ def api_pre_authorized_code(id):
 
 @app.route("/api/pac_status/<pac>")
 def pac_status(pac):
+    revoke = session.get('revoke')
+
+    # print(revoke)
+
     data = {
         'id': pac
     }
@@ -113,6 +119,32 @@ def pac_status(pac):
     # print(res)
 
     status = res['status']
+
+    if status == 'CREDENTIAL_ISSUED' and revoke:
+        uuid = res['uuid']
+        data = {
+            "uuid": uuid,
+            "state": 'revoke'
+            # list: <optional URI of a specific statuslist for which to set/unset the status>
+        }
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {ISSUER_TOKEN}"
+        }
+
+        json_data = json.dumps(data).encode("utf-8")
+
+        revoke_url = ISSUER + "/revoke-credential"
+
+        req = request.Request(revoke_url, json_data, headers)
+        with request.urlopen(req) as f:
+            res = json.loads(f.read().decode())
+
+        # print(res)
+
+        status = res['state']
+
     return json.dumps(status)
 
 
