@@ -6,12 +6,6 @@ import urllib.request
 from flask import Flask, render_template, session, request, send_from_directory
 
 
-ISSUER = 'https://agent.dev.eduwallet.nl/sandbox/api'
-ISSUER_TOKEN = 'bfOPbpdLHKLpY7GImgvnqp5mcV2jQrpF'
-VERIFIER = 'https://verifier.dev.eduwallet.nl/sandbox/api'
-VERIFIER_TOKEN = 'SE59wNFgsie3SiQ0DaGVp9JNI6Tp8SHL'
-
-
 def randid():
     allowed_chars = 'abcdefghijklmnoprstuvwxyz1234567890'
     length = 16
@@ -26,7 +20,7 @@ app.secret_key = b'secret'
 def favicon():
     return send_from_directory(
         os.path.join(app.root_path, 'static'),
-        'favicon.ico', mimetype='image/vnd.microsoft.icon'
+        'wallet.ico', mimetype='image/vnd.microsoft.icon'
     )
 
 
@@ -57,7 +51,6 @@ def api_get():
 
     message = {
         "status": "success",
-        # "test_id": test_id,
         "test": test,
     }
 
@@ -86,11 +79,11 @@ def api_pre_authorized_code():
 
     json_data = json.dumps(data).encode("utf-8")
 
-    create_url = ISSUER + "/create-offer"
+    create_url = config['issuer'] + "/create-offer"
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {ISSUER_TOKEN}"
+        "Authorization": f"Bearer {config['issuer_token']}"
     }
 
     req = urllib.request.Request(create_url, json_data, headers)
@@ -131,7 +124,7 @@ def pac_status():
 
     json_data = json.dumps(data).encode("utf-8")
 
-    check_url = ISSUER + "/check-offer"
+    check_url = config['issuer'] + "/check-offer"
 
     headers = {
         "Content-Type": "application/json",
@@ -155,12 +148,12 @@ def pac_status():
 
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {ISSUER_TOKEN}"
+            "Authorization": f"Bearer {config['issuer_token']}"
         }
 
         json_data = json.dumps(data).encode("utf-8")
 
-        revoke_url = ISSUER + "/revoke-credential"
+        revoke_url = config['issuer'] + "/revoke-credential"
 
         req = urllib.request.Request(revoke_url, json_data, headers)
         with urllib.request.urlopen(req) as f:
@@ -184,11 +177,11 @@ def verifier():
     data = {}
     json_data = json.dumps(data).encode("utf-8")
 
-    create_url = VERIFIER + "/create-offer/" + name
+    create_url = config['verifier'] + "/create-offer/" + name
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {VERIFIER_TOKEN}"
+        "Authorization": f"Bearer {config['verifier_token']}"
     }
 
     req = urllib.request.Request(create_url, json_data, headers)
@@ -218,11 +211,11 @@ def verifier():
 def verifier_status():
     code = session.get('code')
 
-    check_url = VERIFIER + f'/check-offer/{code}'
+    check_url = config['verifier'] + f'/check-offer/{code}'
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {VERIFIER_TOKEN}"
+        "Authorization": f"Bearer {config['verifier_token']}"
     }
 
     req = urllib.request.Request(check_url, None, headers)
@@ -244,6 +237,9 @@ def verifier_status():
 
 with open('tests.json') as data:
     tests = json.load(data)
+
+with open('config.json') as data:
+    config = json.load(data)
 
 
 if __name__ == "__main__":
