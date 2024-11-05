@@ -8,7 +8,7 @@
 <form action='/test' name='myForm' method=POST>
 <input type=hidden name=test_id>
 <div>
-    <input type=checkbox name=pin> Pin
+    <input type=checkbox name=pin value=On> Pin
 </div>
 {% for id, test in tests.items() %}
     <a href="#" onclick="return myClick('{{id}}');"><div class=test>

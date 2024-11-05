@@ -34,7 +34,7 @@ def test():
     form = request.form
     session['form'] = form
     test_id = form.get('test_id')
-    pin = form.get('pin')
+    pin = form.get('pin', 'Off')
     args = {
         'test_id': test_id,
         'pin': pin
