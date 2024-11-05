@@ -6,7 +6,8 @@
 
 <body>
 <h2><a href="/">Home</a></h2>
-<p>{{ id }}</p>
+<p>Test: {{ test_id }}</p>
+<p>Pin: {{ pin }}</p>
 <br>
 
 <div id=qrcode></div>
@@ -28,20 +29,20 @@ function api(url) {
     return result;
 }
 
-function getTest(id) {
-    return api("/api/get/" + id);
+function getTest() {
+    return api("/api/get_test");
 }
 
-function getPAC(id) {
-    return api("/api/pre_authorized_code/" + id);
+function getPAC() {
+    return api("/api/pre_authorized_code");
 }
 
-function getVerifier(id) {
-    return api("/api/verifier/" + id);
+function getVerifier() {
+    return api("/api/verifier");
 }
 
 function checkPACStatus() {
-    var status = api("/api/pac_status/" + pac.pac);
+    var status = api("/api/pac_status");
     console.log(status)
     status_element.innerHTML = status
     if (status === "OFFER_URI_RETRIEVED" && pac.pin && ! alert_shown) {
@@ -58,7 +59,7 @@ function checkPACStatus() {
 }
 
 function checkVerifierStatus() {
-    var result = api("/api/verifier_status/" + verifier.code);
+    var result = api("/api/verifier_status");
     var status = result.status
     console.log(status)
     status_element.innerHTML = status
@@ -80,11 +81,11 @@ var qrcode = new QRCode(qr_element, {
     height : 256
 });
 
-var result = getTest("{{ id }}");
+var result = getTest();
 console.log(result);
 
 if (result.test.type === "issuance") {
-    pac = getPAC(result.id);
+    pac = getPAC();
     qrcode.makeCode(pac.qr_uri);
     uri_element.innerHTML = pac.qr_uri;
     info_element.innerHTML = "<pre>" + JSON.stringify(pac.data, null, 4) + "</pre>";
@@ -92,7 +93,7 @@ if (result.test.type === "issuance") {
 }
 
 if (result.test.type === "verification") {
-    verifier = getVerifier(result.id);
+    verifier = getVerifier();
     qrcode.makeCode(verifier.qr_uri);
     uri_element.innerHTML = verifier.qr_uri;
     info_element.innerHTML = "<pre>" + JSON.stringify(verifier.code, null, 4) + "</pre>";

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+import os
 import json
 import random
-import urllib.request as request
-from flask import Flask, render_template, session
+import urllib.request
+from flask import Flask, render_template, session, request, send_from_directory
 
 
 ISSUER = 'https://agent.dev.eduwallet.nl/sandbox/api'
@@ -20,32 +21,54 @@ def randid():
 app = Flask(__name__)
 app.secret_key = b'secret'
 
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(
+        os.path.join(app.root_path, 'static'),
+        'favicon.ico', mimetype='image/vnd.microsoft.icon'
+    )
+
+
 @app.route("/")
-def server():
-    return render_template("server.j2", tests=tests)
+def landing():
+    return render_template("landing.j2", tests=tests)
 
 
-@app.route("/<id>")
-def test(id):
-    return render_template("test.j2", id=id)
+@app.route("/test", methods=['POST'])
+def test():
+    form = request.form
+    session['form'] = form
+    test_id = form.get('test_id')
+    pin = form.get('pin')
+    args = {
+        'test_id': test_id,
+        'pin': pin
+    }
+
+    return render_template("test.j2", **args)
 
 
-@app.route("/api/get/<id>")
-def api_get(id):
-    test = tests[id]
+@app.route("/api/get_test")
+def api_get():
+    form = session.get('form')
+    test_id = form.get('test_id')
+    test = tests[test_id]
 
     message = {
         "status": "success",
-        "id": id,
+        # "test_id": test_id,
         "test": test,
     }
 
     return json.dumps(message)
 
 
-@app.route("/api/pre_authorized_code/<id>")
-def api_pre_authorized_code(id):
-    test = tests[id]
+@app.route("/api/pre_authorized_code")
+def api_pre_authorized_code():
+    form = session.get('form')
+    test_id = form.get('test_id')
+    test = tests[test_id]
 
     pre_authorized_code = randid()
     data = {
@@ -61,8 +84,6 @@ def api_pre_authorized_code(id):
     if test['options'].get('tx_code', None):
         data['grants']['urn:ietf:params:oauth:grant-type:pre-authorized_code']['tx_code'] = True
 
-    session['revoke'] = test['options'].get('revoke', False)
-
     json_data = json.dumps(data).encode("utf-8")
 
     create_url = ISSUER + "/create-offer"
@@ -72,8 +93,8 @@ def api_pre_authorized_code(id):
         "Authorization": f"Bearer {ISSUER_TOKEN}"
     }
 
-    req = request.Request(create_url, json_data, headers)
-    with request.urlopen(req) as f:
+    req = urllib.request.Request(create_url, json_data, headers)
+    with urllib.request.urlopen(req) as f:
         res = json.loads(f.read().decode())
 
     # print(res)
@@ -83,19 +104,23 @@ def api_pre_authorized_code(id):
 
     message = {
         "status": "success",
-        "id": id,
+        # "test_id": test_id,
         "test": test,
         "qr_uri": qr_uri,
         "pin": pin,
-        "pac": pre_authorized_code,
+        # "pac": pre_authorized_code,
         "data": data
     }
+
+    session['revoke'] = test['options'].get('revoke', False)
+    session['pac'] = pre_authorized_code
 
     return json.dumps(message)
 
 
-@app.route("/api/pac_status/<pac>")
-def pac_status(pac):
+@app.route("/api/pac_status")
+def pac_status():
+    pac = session.get('pac')
     revoke = session.get('revoke')
 
     # print(revoke)
@@ -112,8 +137,8 @@ def pac_status(pac):
         "Content-Type": "application/json",
     }
 
-    req = request.Request(check_url, json_data, headers)
-    with request.urlopen(req) as f:
+    req = urllib.request.Request(check_url, json_data, headers)
+    with urllib.request.urlopen(req) as f:
         res = json.loads(f.read().decode())
 
     # print(res)
@@ -137,8 +162,8 @@ def pac_status(pac):
 
         revoke_url = ISSUER + "/revoke-credential"
 
-        req = request.Request(revoke_url, json_data, headers)
-        with request.urlopen(req) as f:
+        req = urllib.request.Request(revoke_url, json_data, headers)
+        with urllib.request.urlopen(req) as f:
             res = json.loads(f.read().decode())
 
         # print(res)
@@ -148,9 +173,12 @@ def pac_status(pac):
     return json.dumps(status)
 
 
-@app.route("/api/verifier/<id>")
-def verifier(id):
-    test = tests[id]
+@app.route("/api/verifier")
+def verifier():
+    form = session.get('form')
+    test_id = form['test_id']
+
+    test = tests[test_id]
     name = test['credential']['type']
 
     data = {}
@@ -163,8 +191,8 @@ def verifier(id):
         "Authorization": f"Bearer {VERIFIER_TOKEN}"
     }
 
-    req = request.Request(create_url, json_data, headers)
-    with request.urlopen(req) as f:
+    req = urllib.request.Request(create_url, json_data, headers)
+    with urllib.request.urlopen(req) as f:
         res = json.loads(f.read().decode())
 
     # print(res)
@@ -175,28 +203,30 @@ def verifier(id):
 
     message = {
         "status": "success",
-        "id": id,
+        # "test_id": test_id,
         "test": test,
         "qr_uri": qr_uri,
-        "code": code
+        # "code": code
     }
+
+    session['code'] = code
 
     return json.dumps(message)
 
 
-@app.route("/api/verifier_status/<code>")
-def verifier_status(code):
-    # check_url = f'https://verifier.dev.eduwallet.nl/proxy/api/check-offer/{code}'
+@app.route("/api/verifier_status")
+def verifier_status():
+    code = session.get('code')
+
     check_url = VERIFIER + f'/check-offer/{code}'
-    # verifier_token = 'PElLibogkyc3cBUBvYRSMK7q4yThXYwM'
 
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {VERIFIER_TOKEN}"
     }
 
-    req = request.Request(check_url, None, headers)
-    with request.urlopen(req) as f:
+    req = urllib.request.Request(check_url, None, headers)
+    with urllib.request.urlopen(req) as f:
         res = json.loads(f.read().decode())
 
     # print(res)

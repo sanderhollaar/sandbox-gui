@@ -34,3 +34,31 @@ div.test {
     border-radius: 10px;
     background-color: azure;
 }
+
+div#qrcode {
+    margin: 4px;
+    padding: 8px;
+/*     width: 300px; */
+    vertical-align: top;
+    display: inline-block;
+    border: 3px solid darkblue;
+    border-radius: 10px;
+/*     background-color: azure; */
+}
+
+div#status {
+    font-weight: bold;
+/*     background-color: azure; */
+
+}
+
+div#info {
+    margin: 4px;
+    padding: 8px;
+/*     width: 300px; */
+    vertical-align: top;
+    display: inline-block;
+    border: 3px solid lightblue;
+    border-radius: 10px;
+    background-color: azure;
+}

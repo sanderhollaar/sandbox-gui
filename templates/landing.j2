@@ -5,8 +5,13 @@
 
 <body>
 <h2>eduWallet Sandbox</h2>
+<form action='/test' name='myForm' method=POST>
+<input type=hidden name=test_id>
+<div>
+    <input type=checkbox name=pin> Pin
+</div>
 {% for id, test in tests.items() %}
-    <a href="/{{ id }}"><div class=test>
+    <a href="#" onclick="return myClick('{{id}}');"><div class=test>
         <h3>{{ test.name }}</h3>
         <p>{{ test.description }}</p>
         <p>credential type: {{ test.credential.type }}</p>
@@ -14,6 +19,17 @@
         <p>spec: {{ test.spec_version }}</p>
     </div></a>
 {% endfor %}
+</form>
 
+<script type="text/javascript">
+function myClick(test_id) {
+    // alert(test_id);
+    document.myForm.test_id.value = test_id;
+    document.myForm.submit();
+    return false;
+}
+
+
+</script>
 </body>
 </html>
