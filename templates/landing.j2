@@ -5,13 +5,13 @@
 
 <body>
 <h2><img src="{{ url_for('static', filename='wallet.ico') }}" width=32> eduWallet Sandbox</h2>
-<form action='/test' name='myForm' method=POST>
+<form action='/test' name='theForm' method=POST>
 <input type=hidden name=test_id>
 <div>
     <input type=checkbox name=pin value=On> Pin
 </div>
 {% for id, test in tests.items() %}
-    <a href="#" onclick="return myClick('{{id}}');"><div class=test>
+    <a href="#" onclick="return clickTest('{{id}}');"><div class=test>
         <h3>{{ test.name }}</h3>
         <p>{{ test.description }}</p>
         <p>credential type: {{ test.credential.type }}</p>
@@ -22,14 +22,12 @@
 </form>
 
 <script type="text/javascript">
-function myClick(test_id) {
+function clickTest(test_id) {
     // alert(test_id);
-    document.myForm.test_id.value = test_id;
-    document.myForm.submit();
+    document.theForm.test_id.value = test_id;
+    document.theForm.submit();
     return false;
 }
-
-
 </script>
 </body>
 </html>
