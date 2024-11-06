@@ -18,8 +18,8 @@ def favicon():
 
 
 @app.route("/")
-def landing():
-    return render_template("landing.j2", tests=tests)
+def main():
+    return render_template("main.j2", tests=tests)
 
 
 @app.route("/test", methods=['POST'])
