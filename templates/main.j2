@@ -4,17 +4,17 @@
 </head>
 
 <body>
-<h2><img src="{{ url_for('static', filename='wallet.ico') }}" width=32> eduWallet Sandbox</h2>
+<h2><img src="{{ url_for('static', filename='wallet.ico') }}" width=32 align=top> eduWallet Sandbox</h2>
 <form action='/test' name='theForm' method=POST>
 <input type=hidden name=test_id>
 <div class=group>
-    <p><b>Type:</b></p>
+    <p>Type</p>
     <p><input type=checkbox name=ld_jwt value=On> LD_JWT</p>
     <p><input type=checkbox name=vc_jwt value=On> VC_JWT</p>
     <p><input type=checkbox name=sd_jwt value=On> SD_JWT</p>
 </div>
 <div class=group>
-    <p><b>Radio test:</b></p>
+    <p>Radio test</p>
     <p><input type=radio name=radio value=radio1 checked> Radio 1</p>
     <p><input type=radio name=radio value=radio2> Radio 2</p>
     <p><input type=radio name=radio value=radio3> Radio 3</p>
@@ -22,6 +22,7 @@
 <br>
 
 <div class=group>
+<p>Somegroup</p>
 {% for id, test in tests.items() %}
 <div class=test onclick="return clickTest('{{id}}');">
     <h3>{{ test.name }}</h3>

@@ -42,10 +42,11 @@
     },
     "edu_person": {
         "name": "An eduPerson VC",
-        "description": "This VC contains all of the claims that exist in the eduPerson specification (save for the ones defined as DEPRICATED)",
+        "description": "This VC contains all of the claims that exist in the eduPerson specification (save for the ones defined as DEPRECATED)",
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "eduperson.json"
+        "credential": "eduperson.json",
+        "options": {}
     }
 }

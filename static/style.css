@@ -19,13 +19,20 @@ p {
     margin: 0px;
 }
 
+p:first-child {
+    font-weight: bold;
+}
+
 a {
     text-decoration: none;
     color: inherit;
 }
 
-div.group {
+div {
     margin: 4px;
+}
+
+div.group {
     padding: 8px;
     vertical-align: top;
     display: inline-block;
@@ -37,7 +44,6 @@ div.group {
 
 div.test {
     cursor: pointer;
-    margin: 4px;
     padding: 8px;
     width: 300px;
     vertical-align: top;
@@ -50,7 +56,6 @@ div.test {
 div#qrcode {
     margin: 4px;
     padding: 8px;
-/*     width: 300px; */
     vertical-align: top;
     display: inline-block;
     border: 3px solid darkblue;
@@ -65,9 +70,7 @@ div#status {
 }
 
 div#info {
-    margin: 4px;
     padding: 8px;
-/*     width: 300px; */
     vertical-align: top;
     display: inline-block;
     border: 3px solid lightblue;
