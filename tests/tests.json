@@ -1,0 +1,32 @@
+{
+    "test_01": {
+        "name": "Issue VC",
+        "description": "Issue VC",
+        "type": "issuance",
+        "flow": "pre_authorized_code",
+        "spec_version": "Draft 13",
+        "credential": "sharon.json",
+        "options": {
+            "tx_code": true
+        }
+    },
+    "test_02": {
+        "name": "Issue VC & Revoke",
+        "description": "Issue VC and immediately revoke",
+        "type": "issuance",
+        "flow": "pre_authorized_code",
+        "spec_version": "Draft 13",
+        "credential": "sharon.json",
+        "options": {
+            "tx_code": true,
+            "revoke": true
+        }
+    },
+    "test_03": {
+        "name": "Name of the test 2",
+        "description": "A more detailed description of the test 2",
+        "type": "verification",
+        "spec_version": "Draft 13",
+        "credential": "pid.json"
+    }
+}
