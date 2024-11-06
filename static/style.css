@@ -42,7 +42,7 @@ div.test {
     width: 300px;
     vertical-align: top;
     display: inline-block;
-    border: 3px solid darkblue;
+    border: 3px solid lightblue;
     border-radius: 10px;
     background-color: azure;
 }

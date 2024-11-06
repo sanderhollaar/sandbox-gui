@@ -34,8 +34,8 @@
         }
     },
     "test_04": {
-        "name": "Name of the test 2",
-        "description": "A more detailed description of the test 2",
+        "name": "PID Verification",
+        "description": "Verify PID credential",
         "type": "verification",
         "spec_version": "Draft 13",
         "credential": "pid.json"
