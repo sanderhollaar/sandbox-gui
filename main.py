@@ -30,11 +30,13 @@ def test():
     ld_jwt = form.get('ld_jwt', 'Off')
     vc_jwt = form.get('vc_jwt', 'Off')
     sd_jwt = form.get('sd_jwt', 'Off')
+    radio = form.get('radio')
     args = {
         'test_id': test_id,
         'ld_jwt': ld_jwt,
         'vc_jwt': vc_jwt,
         'sd_jwt': sd_jwt,
+        'radio': radio,
     }
 
     return render_template("test.j2", **args)

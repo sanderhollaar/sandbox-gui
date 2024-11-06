@@ -24,7 +24,7 @@ a {
     color: inherit;
 }
 
-div.type {
+div.form {
     margin: 4px;
     padding: 8px;
     vertical-align: top;
@@ -34,6 +34,7 @@ div.type {
 }
 
 div.test {
+    cursor: pointer;
     margin: 4px;
     padding: 8px;
     width: 300px;

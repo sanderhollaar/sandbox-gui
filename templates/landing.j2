@@ -7,22 +7,28 @@
 <h2><img src="{{ url_for('static', filename='wallet.ico') }}" width=32> eduWallet Sandbox</h2>
 <form action='/test' name='theForm' method=POST>
 <input type=hidden name=test_id>
-<div class=type>
-    <p>Type:</p>
+<div class=form>
+    <p><b>Type:</b></p>
     <p><input type=checkbox name=ld_jwt value=On> LD_JWT</p>
     <p><input type=checkbox name=vc_jwt value=On> VC_JWT</p>
     <p><input type=checkbox name=sd_jwt value=On> SD_JWT</p>
 </div>
+<div class=form>
+    <p><b>Radio test:</b></p>
+    <p><input type=radio name=radio value=radio1 checked> Radio 1</p>
+    <p><input type=radio name=radio value=radio2> Radio 2</p>
+    <p><input type=radio name=radio value=radio3> Radio 3</p>
+</div>
 <br>
 
 {% for id, test in tests.items() %}
-    <a href="#" onclick="return clickTest('{{id}}');"><div class=test>
-        <h3>{{ test.name }}</h3>
-        <p>{{ test.description }}</p>
-        <p>credential type: {{ test.credential.type }}</p>
-        <p>type: {{ test.type }}</p>
-        <p>spec: {{ test.spec_version }}</p>
-    </div></a>
+<div class=test onclick="return clickTest('{{id}}');">
+    <h3>{{ test.name }}</h3>
+    <p>{{ test.description }}</p>
+    <p>credential type: {{ test.credential.type }}</p>
+    <p>type: {{ test.type }}</p>
+    <p>spec: {{ test.spec_version }}</p>
+</div>
 {% endfor %}
 </form>
 
