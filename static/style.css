@@ -24,13 +24,15 @@ a {
     color: inherit;
 }
 
-div.form {
+div.group {
     margin: 4px;
     padding: 8px;
     vertical-align: top;
     display: inline-block;
     border: 3px solid lightgrey;
     border-radius: 10px;
+    background-color:white;
+/*     filter: drop-shadow(5px 5px lightgrey) */
 }
 
 div.test {
