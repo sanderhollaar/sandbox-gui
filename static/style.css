@@ -24,6 +24,15 @@ a {
     color: inherit;
 }
 
+div.type {
+    margin: 4px;
+    padding: 8px;
+    vertical-align: top;
+    display: inline-block;
+    border: 3px solid lightgrey;
+    border-radius: 10px;
+}
+
 div.test {
     margin: 4px;
     padding: 8px;
