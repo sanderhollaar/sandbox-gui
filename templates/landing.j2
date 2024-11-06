@@ -7,8 +7,11 @@
 <h2><img src="{{ url_for('static', filename='wallet.ico') }}" width=32> eduWallet Sandbox</h2>
 <form action='/test' name='theForm' method=POST>
 <input type=hidden name=test_id>
+<p>Type:</p>
 <div>
-    <input type=checkbox name=pin value=On> Pin
+    <input type=checkbox name=ld_jwt value=On> LD_JWT
+    <input type=checkbox name=vc_jwt value=On> VC_JWT
+    <input type=checkbox name=sd_jwt value=On> SD_JWT
 </div>
 {% for id, test in tests.items() %}
     <a href="#" onclick="return clickTest('{{id}}');"><div class=test>

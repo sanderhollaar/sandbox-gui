@@ -1,7 +1,7 @@
 {
     "test_01": {
-        "name": "Issue VC",
-        "description": "Issue VC",
+        "name": "Issue ABC VC",
+        "description": "Issue ABC VC",
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
@@ -11,7 +11,18 @@
         }
     },
     "test_02": {
-        "name": "Issue VC & Revoke",
+        "name": "Issue Generic VC",
+        "description": "Issue Generic VC",
+        "type": "issuance",
+        "flow": "pre_authorized_code",
+        "spec_version": "Draft 13",
+        "credential": "generic.json",
+        "options": {
+            "tx_code": true
+        }
+    },
+    "test_03": {
+        "name": "Issue VC & Revoke ABC VC",
         "description": "Issue VC and immediately revoke",
         "type": "issuance",
         "flow": "pre_authorized_code",
@@ -22,7 +33,7 @@
             "revoke": true
         }
     },
-    "test_03": {
+    "test_04": {
         "name": "Name of the test 2",
         "description": "A more detailed description of the test 2",
         "type": "verification",

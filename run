@@ -1,3 +1,3 @@
 #!/bin/sh
 . venv/bin/activate
-gunicorn main:app --reload $(find -type f -regex '.*\.\(json\|js\)' -exec echo --reload-extra-file {} \;)
+gunicorn main:app --reload $(find -type f -regex '.*\.\(json\|j2\)' -exec echo --reload-extra-file {} \;)

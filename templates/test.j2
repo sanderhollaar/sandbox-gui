@@ -7,8 +7,9 @@
 <body>
 <h2><a href="/"><img src="{{ url_for('static', filename='wallet.ico') }}" width=32> Home</a></h2>
 <p>Test: {{ test_id }}</p>
-<p>Pin: {{ pin }}</p>
-<br>
+<p>LD_JWT: {{ ld_jwt }}</p>
+<p>VC_JWT: {{ vc_jwt }}</p>
+<p>SD_JWT: {{ sd_jwt }}</p>
 
 <div id=qrcode></div>
 <div id=uri></div>

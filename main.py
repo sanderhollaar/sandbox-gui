@@ -27,10 +27,14 @@ def test():
     form = request.form
     session['form'] = form
     test_id = form.get('test_id')
-    pin = form.get('pin', 'Off')
+    ld_jwt = form.get('ld_jwt', 'Off')
+    vc_jwt = form.get('vc_jwt', 'Off')
+    sd_jwt = form.get('sd_jwt', 'Off')
     args = {
         'test_id': test_id,
-        'pin': pin
+        'ld_jwt': ld_jwt,
+        'vc_jwt': vc_jwt,
+        'sd_jwt': sd_jwt,
     }
 
     return render_template("test.j2", **args)
