@@ -27,7 +27,7 @@
         "description": "Verify ABC VC",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "sharon.json"
+        "credential": "abc.json"
     },
     "test_02a": {
         "name": "Issue Generic VC",
@@ -45,7 +45,7 @@
         "description": "Verify Generic VC",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "generic.json"
+        "credential": "gc.json"
     },
     "test_03a": {
         "name": "Issue PID",
