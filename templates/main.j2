@@ -27,9 +27,10 @@
 <div class=test onclick="return clickTest('{{id}}');">
     <h3>{{ test.name }}</h3>
     <p>{{ test.description }}</p>
-    <p>credential type: {{ test.credential.type }}</p>
-    <p>type: {{ test.type }}</p>
-    <p>spec: {{ test.spec_version }}</p>
+    <p>type: {{ test.credential.type }}</p>
+    {% if test.flow %}
+    <p>flow: {{ test.flow }}</p>
+    {% endif %}
 </div>
 {% endfor %}
 </div>

@@ -66,7 +66,7 @@
         "credential": "pid.json"
     },
     "edu_person": {
-        "name": "An eduPerson VC",
+        "name": "Issue eduPerson VC",
         "description": "This VC contains all of the claims that exist in the eduPerson specification (save for the ones defined as DEPRECATED)",
         "type": "issuance",
         "flow": "pre_authorized_code",
