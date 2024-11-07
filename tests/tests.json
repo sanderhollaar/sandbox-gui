@@ -1,5 +1,5 @@
 {
-    "test_01": {
+    "test_01a": {
         "name": "Issue ABC VC",
         "description": "Issue ABC VC",
         "type": "issuance",
@@ -10,7 +10,26 @@
             "tx_code": true
         }
     },
-    "test_02": {
+    "test_01b": {
+        "name": "Issue & Revoke ABC VC",
+        "description": "Issue ABC VC and immediately revoke",
+        "type": "issuance",
+        "flow": "pre_authorized_code",
+        "spec_version": "Draft 13",
+        "credential": "sharon.json",
+        "options": {
+            "tx_code": true,
+            "revoke": true
+        }
+    },
+    "test_01c": {
+        "name": "Verify ABC VC",
+        "description": "Verify ABC VC",
+        "type": "verification",
+        "spec_version": "Draft 13",
+        "credential": "sharon.json"
+    },
+    "test_02a": {
         "name": "Issue Generic VC",
         "description": "Issue Generic VC",
         "type": "issuance",
@@ -21,20 +40,15 @@
             "tx_code": true
         }
     },
-    "test_03": {
-        "name": "Issue VC & Revoke ABC VC",
-        "description": "Issue VC and immediately revoke",
-        "type": "issuance",
-        "flow": "pre_authorized_code",
+    "test_02b": {
+        "name": "Verify Generic VC",
+        "description": "Verify Generic VC",
+        "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "sharon.json",
-        "options": {
-            "tx_code": true,
-            "revoke": true
-        }
+        "credential": "generic.json"
     },
-    "test_04": {
-        "name": "PID Issuance",
+    "test_03a": {
+        "name": "Issue PID",
         "description": "Issue PID credential",
         "type": "issuance",
         "spec_version": "Draft 13",
@@ -44,8 +58,8 @@
             "revoke": false
         }
     },
-    "test_05": {
-        "name": "PID Verification",
+    "test_03b": {
+        "name": "Verify PID",
         "description": "Verify PID credential",
         "type": "verification",
         "spec_version": "Draft 13",
