@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import json
 import urllib.request
+import logging
 
 from flask import Blueprint, session
 
@@ -13,6 +14,13 @@ api = Blueprint("api", __name__, url_prefix="/api")
 @api.route("/get_test")
 def api_get():
     form = session.get('form')
+    if form is None:
+        logging.error("get_test request failed")
+        message = {
+            "status": "error"
+        }
+        return json.dumps(message)
+
     test_id = form.get('test_id')
     test = tests[test_id]
 
@@ -27,6 +35,13 @@ def api_get():
 @api.route("/pre_authorized_code")
 def api_pre_authorized_code():
     form = session.get('form')
+    if form is None:
+        logging.error("pre_authorized_code request failed")
+        message = {
+            "status": "error"
+        }
+        return json.dumps(message)
+
     test_id = form.get('test_id')
     test = tests[test_id]
 
@@ -81,6 +96,13 @@ def api_pre_authorized_code():
 @api.route("/pac_status")
 def pac_status():
     pac = session.get('pac')
+    if pac is None:
+        logging.error("pac_status request failed")
+        message = {
+            "status": "error"
+        }
+        return json.dumps(message)
+
     revoke = session.get('revoke')
 
     # print(revoke)
@@ -136,6 +158,13 @@ def pac_status():
 @api.route("/verifier")
 def verifier():
     form = session.get('form')
+    if form is None:
+        logging.error("verifier request failed")
+        message = {
+            "status": "error"
+        }
+        return json.dumps(message)
+
     test_id = form['test_id']
 
     test = tests[test_id]
@@ -177,6 +206,12 @@ def verifier():
 @api.route("/verifier_status")
 def verifier_status():
     code = session.get('code')
+    if code is None:
+        logging.error("verifier_status request failed")
+        message = {
+            "status": "error"
+        }
+        return json.dumps(message)
 
     check_url = config['verifier'] + f'/check-offer/{code}'
 
