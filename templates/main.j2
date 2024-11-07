@@ -8,7 +8,7 @@
 <form action='/test' name='theForm' method=POST>
 <input type=hidden name=test_id>
 <div class=group>
-    <p>Type</p>
+    <p>Type test</p>
     <p><input type=checkbox name=ld_jwt value=On> LD_JWT</p>
     <p><input type=checkbox name=vc_jwt value=On> VC_JWT</p>
     <p><input type=checkbox name=sd_jwt value=On> SD_JWT</p>
@@ -22,7 +22,7 @@
 <br>
 
 <div class=group>
-<p>Somegroup</p>
+<p>Somegroup test</p>
 {% for id, test in tests.items() %}
 <div class=test onclick="return clickTest('{{id}}');">
     <h3>{{ test.name }}</h3>
@@ -37,7 +37,6 @@
 
 <script type="text/javascript">
 function clickTest(test_id) {
-    // alert(test_id);
     document.theForm.test_id.value = test_id;
     document.theForm.submit();
     return false;

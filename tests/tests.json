@@ -34,6 +34,17 @@
         }
     },
     "test_04": {
+        "name": "PID Issuance",
+        "description": "Issue PID credential",
+        "type": "issuance",
+        "spec_version": "Draft 13",
+        "credential": "pid.json",
+        "options": {
+            "tx_code": false,
+            "revoke": false
+        }
+    },
+    "test_05": {
         "name": "PID Verification",
         "description": "Verify PID credential",
         "type": "verification",
