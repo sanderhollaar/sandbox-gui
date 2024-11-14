@@ -8,28 +8,10 @@
         "displayName": "Carl Linnaeus",
         "schacHomeOrganization": "uvh.nl",
         "mail": "clinnaeus.uvh@dev.eduwallet.nl",
-        "eduPersonAffiliation": [
-            "employee",
-            "faculty",
-            "member"
-        ],
-        "eduPersonScopedAffiliation": [
-            "employee@uvh.nl",
-            "faculty@uvh.nl",
-            "member@uvh.nl"
-        ],
-        "eduPersonEntitlement": [
-            "urn:mace:dir:entitlement:common-lib-terms-example",
-            "urn:x-surf:entitlement:dyslexia"
-        ],
-        "eduPersonAssurance": [
-            "https://refeds.org/assurance",
-            "https://refeds.org/assurance/profile/cappuccino",
-            "https://refeds.org/assurance/ID/unique",
-            "https://refeds.org/assurance/IAP/medium",
-            "https://refeds.org/assurance/IAP/local-enterprise",
-            "https://refeds.org/assurance/ATP/ePA-1m"
-        ],
+        "eduPersonAffiliation": "employee, faculty, member", 
+        "eduPersonScopedAffiliation": "employee@uvh.nl, faculty@uvh.nl, member@uvh.nl", 
+        "eduPersonEntitlement": "urn:mace:dir:entitlement:common-lib-terms-example, urn:x-surf:entitlement:dyslexia", 
+        "eduPersonAssurance": "https://refeds.org/assurance, https://refeds.org/assurance/profile/cappuccino, https://refeds.org/assurance/ID/unique, https://refeds.org/assurance/IAP/medium, https://refeds.org/assurance/IAP/local-enterprise, https://refeds.org/assurance/ATP/ePA-1m",
         "_ttl": "62208000"
     }
 }
