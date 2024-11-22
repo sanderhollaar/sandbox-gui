@@ -38,7 +38,7 @@ div.group {
     display: inline-block;
     border: 3px solid lightgrey;
     border-radius: 10px;
-    background-color:white;
+    background-color:#f0f0f0;
 /*     filter: drop-shadow(5px 5px lightgrey) */
 }
 

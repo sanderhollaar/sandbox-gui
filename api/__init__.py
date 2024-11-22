@@ -1,14 +1,22 @@
 #!/usr/bin/env python
+import os
 import json
 
-with open('tests/tests.json') as data:
-    tests = json.load(data)
+testset = {}
 
-for k, v in tests.items():
-    credential = v['credential']
-    with open(f'tests/{credential}') as data:
-        cred = json.load(data)
-        v['credential'] = cred
+for file in os.listdir('tests'):
+    if file.endswith(".json"):
+        with open('tests/' + file) as data:
+            tests = json.load(data)
+
+        for k, v in tests.items():
+            credential = v['credential']
+            with open(f'tests/credentials/{credential}') as data:
+                cred = json.load(data)
+                v['credential'] = cred
+
+        name = file[:-5]
+        testset[name] = tests
 
 with open('config.json') as data:
     config = json.load(data)

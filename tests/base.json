@@ -64,41 +64,5 @@
         "type": "verification",
         "spec_version": "Draft 13",
         "credential": "pid.json"
-    },
-    "edu_person": {
-        "name": "Issue eduPerson VC",
-        "description": "This VC contains all of the claims that exist in the eduPerson specification (save for the ones defined as DEPRECATED)",
-        "type": "issuance",
-        "flow": "pre_authorized_code",
-        "spec_version": "Draft 13",
-        "credential": "eduperson.json",
-        "options": {}
-    },
-    "VO_0": {
-        "name": "Academic Base Credential for Linnaeus",
-        "description": "This VC contains an Academic Base Credential for user Linnaeus.",
-        "type": "issuance",
-        "flow": "pre_authorized_code",
-        "spec_version": "Draft 13",
-        "credential": "linnaeus.json",
-        "options": {}
-    },
-    "VO_1": {
-        "name": "VO1: credentials for 'Galactic Senate' Virtual Organisation members",
-        "description": "This VC contains a set of the claims that might be provided by the 'Galactic Senate' Virtual Organisation for user Linnaeus",
-        "type": "issuance",
-        "flow": "pre_authorized_code",
-        "spec_version": "Draft 13",
-        "credential": "linnaeus_VO1.json",
-        "options": {}
-    },
-    "VO_2": {
-        "name": "VO2: credentials for 'Rebel Alliance' Virtual Organisation members",
-        "description": "This VC contains a set of the claims that might be provided by the 'Rebel Alliance' Virtual Organisation for user Linnaeus",
-        "type": "issuance",
-        "flow": "pre_authorized_code",
-        "spec_version": "Draft 13",
-        "credential": "linnaeus_VO2.json",
-        "options": {}
     }
 }

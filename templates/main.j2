@@ -6,6 +6,7 @@
 <body>
 <h2><img src="{{ url_for('static', filename='wallet.ico') }}" width=32 align=top> eduWallet Sandbox</h2>
 <form action='/test' name='theForm' method=POST>
+<input type=hidden name=test_file>
 <input type=hidden name=test_id>
 <div class=group>
     <p>Type test</p>
@@ -20,10 +21,11 @@
 </div>
 <br>
 
+{% for file, tests in testset.items() %}
 <div class=group>
-<p>Somegroup test</p>
+<p>{{ file }}</p>
 {% for id, test in tests.items() %}
-<div class=test onclick="return clickTest('{{id}}');">
+<div class=test onclick="return clickTest('{{file}}', '{{id}}');">
     <h3>{{ test.name }}</h3>
     <p>{{ test.description }}</p>
     <p>type: {{ test.credential.type }}</p>
@@ -33,10 +35,12 @@
 </div>
 {% endfor %}
 </div>
+{% endfor %}
 </form>
 
 <script type="text/javascript">
-function clickTest(test_id) {
+function clickTest(test_file, test_id) {
+    document.theForm.test_file.value = test_file;
     document.theForm.test_id.value = test_id;
     document.theForm.submit();
     return false;

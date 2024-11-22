@@ -2,7 +2,7 @@
 import os
 from flask import Flask, render_template, session, request, send_from_directory
 
-from api.api import api, tests
+from api.api import api, testset
 
 app = Flask(__name__)
 app.secret_key = b'secret'
@@ -19,7 +19,7 @@ def favicon():
 
 @app.route("/")
 def main():
-    return render_template("main.j2", tests=tests)
+    return render_template("main.j2", testset=testset)
 
 
 @app.route("/test", methods=['POST'])

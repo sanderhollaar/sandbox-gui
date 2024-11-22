@@ -5,7 +5,7 @@ import logging
 
 from flask import Blueprint, session
 
-from api import tests, config
+from api import testset, config
 from lib import utils
 
 api = Blueprint("api", __name__, url_prefix="/api")
@@ -21,8 +21,9 @@ def api_get():
         }
         return json.dumps(message)
 
+    test_file = form.get('test_file')
     test_id = form.get('test_id')
-    test = tests[test_id]
+    test = testset[test_file][test_id]
 
     message = {
         "status": "success",
@@ -42,8 +43,9 @@ def api_pre_authorized_code():
         }
         return json.dumps(message)
 
+    test_file = form.get('test_file')
     test_id = form.get('test_id')
-    test = tests[test_id]
+    test = testset[test_file][test_id]
 
     pre_authorized_code = utils.randid()
     data = {
@@ -165,9 +167,10 @@ def verifier():
         }
         return json.dumps(message)
 
-    test_id = form['test_id']
+    test_file = form.get('test_file')
+    test_id = form.get('test_id')
+    test = testset[test_file][test_id]
 
-    test = tests[test_id]
     name = test['credential']['type']
 
     data = {}
