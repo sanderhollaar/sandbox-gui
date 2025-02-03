@@ -57,7 +57,8 @@ Three credential types are currently supported:
 Credential specific behaviour may be signalled in the credential by including key/value pairs starting with an "_", like "_ttl" which defines the expiration 
 
 #### GenericCredential
-The GenericCredential credential type allows for the issuance of a verifiable credential containing arbitrairy claims, as long as it can be represented as a set key value pairs. For example:
+The GenericCredential credential type allows for the issuance of a verifiable credential containing arbitrairy claims, as long as it can be represented as a set key value pairs. 
+For example:
 ```
 {
     "type": "GenericCredential",
