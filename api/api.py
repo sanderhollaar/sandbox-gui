@@ -45,11 +45,22 @@ def api_pre_authorized_code():
 
     test_file = form.get('test_file')
     test_id = form.get('test_id')
+    vc_type = form.get('vc_type')
     test = testset[test_file][test_id]
+
+    credential_type = test['credential']['type']
+    if credential_type in [
+        'GenericCredential',
+        'SupportCredential',
+        'StudyDataCredential',
+        'StudentCardCredential',
+        'ExamEnrollmentCredential'
+    ]:
+        credential_type += vc_type
 
     pre_authorized_code = utils.randid()
     data = {
-        'credentials': [test['credential']['type']],
+        'credentials': [credential_type],
         'grants': {
             'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
                 'pre-authorized_code': pre_authorized_code,
@@ -65,16 +76,18 @@ def api_pre_authorized_code():
 
     create_url = config['issuer'] + "/create-offer"
 
+    print(create_url)
+
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {config['issuer_token']}"
     }
 
+    print(json_data)
+
     req = urllib.request.Request(create_url, json_data, headers)
     with urllib.request.urlopen(req) as f:
         res = json.loads(f.read().decode())
-
-    # print(res)
 
     qr_uri = res['uri']
     pin = res.get('txCode')

@@ -16,7 +16,7 @@ h3 {
 }
 
 p {
-    margin: 0px;
+    margin: 5px 0px -1px;
 }
 
 p:first-child {
@@ -40,6 +40,11 @@ div.group {
     border-radius: 10px;
     background-color:#f0f0f0;
 /*     filter: drop-shadow(5px 5px lightgrey) */
+}
+
+div.together {
+    vertical-align: top;
+    display: inline-block;
 }
 
 div.test {

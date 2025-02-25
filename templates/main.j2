@@ -9,15 +9,22 @@
 <input type=hidden name=test_file>
 <input type=hidden name=test_id>
 <div class=group>
-    <p>Type test</p>
-    <p><input type=checkbox name=ld_jwt value=On> LD_JWT</p>
-    <p><input type=checkbox name=vc_jwt value=On> VC_JWT</p>
-    <p><input type=checkbox name=sd_jwt value=On> SD_JWT</p>
-</div>
-<div class=group>
-    <p>Radio test</p>
-    <p><input type=radio name=radio value=radio1 checked> Radio 1</p>
-    <p><input type=radio name=radio value=radio2> Radio 2</p>
+    <div class=together>
+    <p></p>
+    <p>
+        GenericCredential<br>
+        SupportCredential<br>
+        StudyDataCredential<br>
+        StudentCardCredential<br>
+        ExamEnrollmentCredential
+    </p>
+    </div>
+    <div class=together>
+        <p>VC Type</p>
+        <p><input type=radio name=vc_type value=_JWT checked> VC_JWT</p>
+        <p><input type=radio name=vc_type value=_LD> LD_JWT</p>
+        <p><input type=radio name=vc_type value=_SD> SD_JWT</p>
+    </div>
 </div>
 <br>
 
@@ -27,11 +34,11 @@
 {% for id, test in tests.items() %}
 <div class=test onclick="return clickTest('{{file}}', '{{id}}');">
     <h3>{{ test.name }}</h3>
-    <p>{{ test.description }}</p>
-    <p>type: {{ test.credential.type }}</p>
+    <p>type: <b>{{ test.credential.type }}</b></p>
     {% if test.flow %}
     <p>flow: {{ test.flow }}</p>
     {% endif %}
+    <p>{{ test.description }}</p>
 </div>
 {% endfor %}
 </div>
