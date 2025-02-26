@@ -16,11 +16,17 @@ h3 {
 }
 
 p {
-    margin: 5px 0px -1px;
+/*     margin: 5px 0px 0px; */
+    margin: 0px;
 }
 
 p:first-child {
     font-weight: bold;
+}
+
+p.description {
+    margin-top: 6px;
+    font-size: smaller;
 }
 
 a {
