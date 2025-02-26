@@ -51,10 +51,10 @@ def api_pre_authorized_code():
     credential_type = test['credential']['type']
     if credential_type in [
         'GenericCredential',
-        'SupportCredential',
-        'StudyDataCredential',
-        'StudentCardCredential',
-        'ExamEnrollmentCredential'
+        # 'SupportCredential',
+        # 'StudyDataCredential',
+        # 'StudentCardCredential',
+        # 'ExamEnrollmentCredential'
     ]:
         credential_type += vc_type
 
