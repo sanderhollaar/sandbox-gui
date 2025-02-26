@@ -6,9 +6,7 @@
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
         "credential": "sharon.json",
-        "options": {
-            "tx_code": true
-        }
+        "options": {}
     },
     "test_01b": {
         "name": "Issue & Revoke ABC VC",
@@ -18,7 +16,6 @@
         "spec_version": "Draft 13",
         "credential": "sharon.json",
         "options": {
-            "tx_code": true,
             "revoke": true
         }
     },
@@ -27,7 +24,8 @@
         "description": "Verify ABC VC",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "abc.json"
+        "credential": "abc.json",
+        "options": {}
     },
     "test_02a": {
         "name": "Issue Generic VC",
@@ -36,16 +34,15 @@
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
         "credential": "generic.json",
-        "options": {
-            "tx_code": true
-        }
+        "options": {}
     },
     "test_02b": {
         "name": "Verify Generic VC",
         "description": "Verify Generic VC",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "gc.json"
+        "credential": "gc.json",
+        "options": {}
     },
     "test_03a": {
         "name": "Issue PID",
@@ -54,7 +51,6 @@
         "spec_version": "Draft 13",
         "credential": "pid.json",
         "options": {
-            "tx_code": false,
             "revoke": false
         }
     },
@@ -63,6 +59,7 @@
         "description": "Verify PID credential",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "pid.json"
+        "credential": "pid.json",
+        "options": {}
     }
 }

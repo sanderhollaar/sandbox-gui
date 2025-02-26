@@ -69,8 +69,16 @@ def api_pre_authorized_code():
         'credentialDataSupplierInput': test['credential']['claims'],
     }
 
-    if test['options'].get('tx_code', None):
-        data['grants']['urn:ietf:params:oauth:grant-type:pre-authorized_code']['tx_code'] = True
+    tx_code_len = form.get('tx_code_len')
+    if int(tx_code_len) > 0:
+        tx_code_mode = form.get('tx_code_mode')
+        tx_code = {
+            'length': int(tx_code_len),
+            'input_mode': tx_code_mode
+        }
+    else:
+        tx_code = False
+    data['grants']['urn:ietf:params:oauth:grant-type:pre-authorized_code']['tx_code'] = tx_code
 
     json_data = json.dumps(data).encode("utf-8")
 

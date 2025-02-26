@@ -26,6 +26,19 @@
         <p><input type=radio name=vc_type value=_SD> SD_JWT</p>
     </div>
 </div>
+<div class=group>
+    <div class=together>
+        <p>Pin Length</p>
+        <p><input type=radio name=tx_code_len value=0 checked> None</p>
+        <p><input type=radio name=tx_code_len value=4> 4</p>
+        <p><input type=radio name=tx_code_len value=6> 6</p>
+    </div>
+    <div class=together>
+        <p>Pin Type</p>
+        <p><input type=radio name=tx_code_mode value=numeric checked> Numeric</p>
+        <p><input type=radio name=tx_code_mode value=text> Text</p>
+    </div>
+</div>
 <br>
 
 {% for file, tests in testset.items() %}
