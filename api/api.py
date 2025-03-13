@@ -110,7 +110,7 @@ def api_pre_authorized_code():
         "data": data
     }
 
-    session['revoke'] = test['options'].get('revoke', False)
+    session['revoke'] = True if form.get('revoke') else False
     session['pac'] = pre_authorized_code
 
     return json.dumps(message)

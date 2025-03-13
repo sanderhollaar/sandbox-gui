@@ -6,7 +6,6 @@
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "eduperson.json",
-        "options": {}
+        "credential": "eduperson.json"
     }
 }

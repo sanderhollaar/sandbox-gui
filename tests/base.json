@@ -5,8 +5,7 @@
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "sharon.json",
-        "options": {}
+        "credential": "sharon.json"
     },
     "test_01b": {
         "name": "Issue & Revoke ABC VC",
@@ -14,18 +13,14 @@
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "sharon.json",
-        "options": {
-            "revoke": true
-        }
+        "credential": "sharon.json"
     },
     "test_01c": {
         "name": "Verify ABC VC",
         "description": "Verify ABC VC",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "abc.json",
-        "options": {}
+        "credential": "abc.json"
     },
     "test_02a": {
         "name": "Issue Generic VC",
@@ -33,33 +28,27 @@
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "generic.json",
-        "options": {}
+        "credential": "generic.json"
     },
     "test_02b": {
         "name": "Verify Generic VC",
         "description": "Verify Generic VC",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "gc.json",
-        "options": {}
+        "credential": "gc.json"
     },
     "test_03a": {
         "name": "Issue PID",
         "description": "Issue PID credential",
         "type": "issuance",
         "spec_version": "Draft 13",
-        "credential": "pid.json",
-        "options": {
-            "revoke": false
-        }
+        "credential": "pid.json"
     },
     "test_03b": {
         "name": "Verify PID",
         "description": "Verify PID credential",
         "type": "verification",
         "spec_version": "Draft 13",
-        "credential": "pid.json",
-        "options": {}
+        "credential": "pid.json"
     }
 }
