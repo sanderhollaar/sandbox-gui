@@ -41,8 +41,48 @@
     <p>Options</p>
     <p><input type=checkbox name=revoke value=true> Revoke</p>
 </div>
-<br>
 
+<br>
+<div class=group>
+<p>Issue pre-authorized freeform VC</p>
+<div class=test style='width: unset'>
+<textarea name=free cols=80 rows=15 style='border: 0px'>
+{
+    "type": "GenericCredential",
+    "claims": {
+        "_ttl": ["31104000"],
+        "sub": ["43e27e05-a688-41df-ab1e-b74271fe02c6"],
+        "eduperson_unique_id": ["43e27e05-a688-41df-ab1e-b74271fe02c6"],
+        "given_name": ["Sharon"],
+        "family_name": ["Hankins"],
+        "name": ["Sharon Hankins"],
+        "schac_home_organisation": ["UvH.nl"],
+        "email": ["eduwallet.test+shankins.uvh@gmail.com"],
+        "eduperson_affiliation": [
+            "student",
+            "member"
+        ],
+        "eduperson_scoped_affiliation": [
+            "student@uvh.nl",
+            "member@uvh.nl"
+        ],
+        "eduperson_entitlement": [
+            "urn:mace:dir:entitlement:common-lib-terms-example"
+        ],
+        "eduperson_assurance": [
+            "https://refeds.org/assurance"
+        ]
+    }
+}
+</textarea>
+</div>
+<br>
+<p>
+<input type=button value=&#128009;Issue onclick="return clickTest('free', 'free');">
+</p>
+</div>
+
+<br>
 {% for file, tests in testset.items() %}
 <div class=group>
 <p>{{ file }}</p>

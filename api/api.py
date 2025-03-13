@@ -12,7 +12,7 @@ api = Blueprint("api", __name__, url_prefix="/api")
 
 
 @api.route("/get_test")
-def api_get():
+def api_get_test():
     form = session.get('form')
     if form is None:
         logging.error("get_test request failed")
@@ -22,8 +22,14 @@ def api_get():
         return json.dumps(message)
 
     test_file = form.get('test_file')
-    test_id = form.get('test_id')
-    test = testset[test_file][test_id]
+    if test_file != "free":
+        test_id = form.get('test_id')
+        test = testset[test_file][test_id]
+    else:
+        test = {
+            "type": "issuance",
+            "credential": form.get('free', {})
+        }
 
     message = {
         "status": "success",
@@ -44,9 +50,15 @@ def api_pre_authorized_code():
         return json.dumps(message)
 
     test_file = form.get('test_file')
-    test_id = form.get('test_id')
     vc_type = form.get('vc_type')
-    test = testset[test_file][test_id]
+    if test_file != "free":
+        test_id = form.get('test_id')
+        test = testset[test_file][test_id]
+    else:
+        test = {
+            "type": "issuance",
+            "credential": json.loads(form.get('free', {}))
+        }
 
     credential_type = test['credential']['type']
     if credential_type in [
@@ -102,11 +114,9 @@ def api_pre_authorized_code():
 
     message = {
         "status": "success",
-        # "test_id": test_id,
         "test": test,
         "qr_uri": qr_uri,
         "pin": pin,
-        # "pac": pre_authorized_code,
         "data": data
     }
 
@@ -216,10 +226,8 @@ def verifier():
 
     message = {
         "status": "success",
-        # "test_id": test_id,
         "test": test,
         "qr_uri": qr_uri,
-        # "code": code
     }
 
     session['code'] = code
