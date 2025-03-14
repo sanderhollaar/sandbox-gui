@@ -77,7 +77,8 @@ var alert_shown = false;
 
 var qrcode = new QRCode(qr_element, {
     width : 256,
-    height : 256
+    height : 256,
+    correctLevel : QRCode.CorrectLevel.L
 });
 
 var result = getTest();

@@ -68,7 +68,8 @@ def api_pre_authorized_code():
         # 'StudentCardCredential',
         # 'ExamEnrollmentCredential'
     ]:
-        credential_type += vc_type
+        pass
+    credential_type += vc_type
 
     pre_authorized_code = utils.randid()
     data = {
