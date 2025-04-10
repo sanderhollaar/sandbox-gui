@@ -6,7 +6,6 @@ import logging
 from flask import Blueprint, session
 
 from api import testset, config
-from lib import utils
 
 api = Blueprint("api", __name__, url_prefix="/api")
 
@@ -71,13 +70,10 @@ def api_pre_authorized_code():
         pass
     credential_type += vc_type
 
-    pre_authorized_code = utils.randid()
     data = {
         'credentials': [credential_type],
         'grants': {
-            'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
-                'pre-authorized_code': pre_authorized_code,
-            },
+            'urn:ietf:params:oauth:grant-type:pre-authorized_code': {},
         },
         'credentialDataSupplierInput': test['credential']['claims'],
     }
@@ -97,14 +93,13 @@ def api_pre_authorized_code():
 
     create_url = config['issuer'] + "/create-offer"
 
-    print(create_url)
-
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {config['issuer_token']}"
     }
 
-    print(json_data)
+    # print(create_url)
+    # print(json_data)
 
     req = urllib.request.Request(create_url, json_data, headers)
     with urllib.request.urlopen(req) as f:
@@ -112,6 +107,7 @@ def api_pre_authorized_code():
 
     qr_uri = res['uri']
     pin = res.get('txCode')
+    pac_id = res.get('id')
 
     message = {
         "status": "success",
@@ -122,15 +118,15 @@ def api_pre_authorized_code():
     }
 
     session['revoke'] = True if form.get('revoke') else False
-    session['pac'] = pre_authorized_code
+    session['pac_id'] = pac_id
 
     return json.dumps(message)
 
 
 @api.route("/pac_status")
 def pac_status():
-    pac = session.get('pac')
-    if pac is None:
+    pac_id = session.get('pac_id')
+    if pac_id is None:
         logging.error("pac_status request failed")
         message = {
             "status": "error"
@@ -142,7 +138,7 @@ def pac_status():
     # print(revoke)
 
     data = {
-        'id': pac
+        'id': pac_id
     }
 
     json_data = json.dumps(data).encode("utf-8")
@@ -151,9 +147,15 @@ def pac_status():
 
     headers = {
         "Content-Type": "application/json",
+        "Authorization": f"Bearer {config['issuer_token']}"
     }
 
+    # print(f'check_url: {check_url}')
+    # print(headers)
+    # print(json_data)
+
     req = urllib.request.Request(check_url, json_data, headers)
+
     with urllib.request.urlopen(req) as f:
         res = json.loads(f.read().decode())
 
