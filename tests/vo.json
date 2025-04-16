@@ -5,7 +5,7 @@
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "linnaeus.json"
+        "credential": "linnaeus_ABC.json"
     },
     "VO_1": {
         "name": "VO1: credentials for 'Galactic Senate' Virtual Organisation members",
@@ -13,7 +13,7 @@
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "linnaeus_VO1.json"
+        "credential": "linnaeus_GC_VO1.json"
     },
     "VO_2": {
         "name": "VO2: credentials for 'Rebel Alliance' Virtual Organisation members",
@@ -21,6 +21,6 @@
         "type": "issuance",
         "flow": "pre_authorized_code",
         "spec_version": "Draft 13",
-        "credential": "linnaeus_VO2.json"
+        "credential": "linnaeus_GC_VO2.json"
     }
 }
