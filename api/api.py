@@ -225,12 +225,18 @@ def verifier():
 
     qr_uri = res['requestUri']
     check_uri = res['checkUri']
+
+    print(f"check_uri: {check_uri}")
+
     code = check_uri.split("/")[-1]
+
+    print(f"code: {code}")
 
     message = {
         "status": "success",
         "test": test,
         "qr_uri": qr_uri,
+        "code": code
     }
 
     session['code'] = code
